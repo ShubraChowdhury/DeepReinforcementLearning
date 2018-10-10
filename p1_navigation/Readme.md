@@ -1,4 +1,4 @@
-The Environment
+<h1>The Environment</h1>
 For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.
 
 ![image](https://s3.amazonaws.com/video.udacity-data.com/topher/2018/June/5b1ab4b0_banana/banana.gif )
@@ -15,3 +15,18 @@ The state space has 37 dimensions and contains the agent's velocity, along with 
 2 - turn left.
 3 - turn right.
 The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
+
+<h2>Installation</h2>
+
+To set up your python environment to run the code in this repository, follow the instructions below.
+
+<h3>Windows: </h3>
+<li>1. Create (and activate) a new environment with Python 3.6.
+conda create --name drlnd python=3.6 
+activate drlnd
+<li>2. Install belowmentioned python packages
+Next Install Following packages :
+tensorflow
+Tensorflow-gpu
+pytorch
+torch
