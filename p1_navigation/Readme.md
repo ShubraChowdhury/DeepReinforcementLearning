@@ -48,7 +48,9 @@ torchvision    0.2.1<br>
  Box2D  2.3.2   <br>
 Box2D-kengz  2.3.3<br>
 atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
-<h4>4. Clone the repository deep-reinforcement-learning.git</h4><br>
+<h4>4. Clone the repository deep-reinforcement-learning.git</h4>
   git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
 cd deep-reinforcement-learning/python<br>
 pip install .<br>
+<h4>5. Run jupyternotebook</h4>
+Change the kernel to drlnd
