@@ -20,13 +20,13 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 To set up your python environment to run the code in this repository, follow the instructions below.
 
-<h3>Windows: </h3>
-<li>1. Create (and activate) a new environment with Python 3.6.
+<h3>For Installation Windows with GPU </h3><br>
+<h4>1.</h4> Create (and activate) a new environment with Python 3.6.
   <br>
 conda create --name drlnd python=3.6 
   <br>
-activate drlnd
-<li>2. Install below mentioned python packages
+activate drlnd<br>
+<h4>2.</h4> Install below mentioned python packages<br>
   <br>
 matplotlib 2.2.2  <br>
 numpy 1.14.3 <br>
@@ -44,11 +44,11 @@ cuda90  1.0  h4c72538_0  peterjc123<br>
 torch-0.4.0 (torch-0.4.0-cp36-cp36m-win_amd64.whl)<br>
 torchvision    0.2.1<br>
  pytorch 0.3.1<br>
-<li>3. Follow the instructions in this ![alt text](https://github.com/openai/gym "repository") to perform a minimal install of OpenAI gym.  <br>
+<h4>3.</h4> Follow the instructions in this ![Alt text](https://github.com/openai/gym "repository") to perform a minimal install of OpenAI gym.  <br>
  Box2D  2.3.2   <br>
 Box2D-kengz  2.3.3<br>
 atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
-<li>4. Clone the repository deep-reinforcement-learning.git<br>
+<h4>4.</h4> Clone the repository deep-reinforcement-learning.git<br>
   git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
 cd deep-reinforcement-learning/python<br>
 pip install .<br>
