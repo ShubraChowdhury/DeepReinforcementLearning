@@ -21,12 +21,12 @@ The task is episodic, and in order to solve the environment, your agent must get
 To set up your python environment to run the code in this repository, follow the instructions below.
 
 <h3>For Installation Windows with GPU </h3><br>
-<h4>1.</h4> Create (and activate) a new environment with Python 3.6.
+<h4>1. Create (and activate) a new environment with Python 3.6.</h4>
   <br>
 conda create --name drlnd python=3.6 
   <br>
 activate drlnd<br>
-<h4>2.</h4> Install below mentioned python packages<br>
+<h4>2. Install below mentioned python packages</h4>
   <br>
 matplotlib 2.2.2  <br>
 numpy 1.14.3 <br>
@@ -48,7 +48,7 @@ torchvision    0.2.1<br>
  Box2D  2.3.2   <br>
 Box2D-kengz  2.3.3<br>
 atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
-<h4>4.</h4> Clone the repository deep-reinforcement-learning.git<br>
+<h4>4. Clone the repository deep-reinforcement-learning.git</h4><br>
   git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
 cd deep-reinforcement-learning/python<br>
 pip install .<br>
