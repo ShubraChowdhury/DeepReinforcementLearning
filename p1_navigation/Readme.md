@@ -20,7 +20,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 To set up your python environment to run the code in this repository, follow the instructions below.
 
-<h3>For Installation Windows with GPU </h3>
+<h3>For Installation Windows 64 bit with GPU </h3>
 <h4>1. Create (and activate) a new environment with Python 3.6.</h4>
 
 conda create --name drlnd python=3.6 
@@ -52,5 +52,11 @@ atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
   git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
 cd deep-reinforcement-learning/python<br>
 pip install .<br>
+
+
+<h4>5. Download the Unity Environment</h4>
+Windows (64-bit): click  <a href="https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip"> here </a><br>
+Then, place the file in the p1_navigation/ folder in the DRLND GitHub repository, and unzip (or decompress) the file.
 <h4>5. Run jupyternotebook</h4>
-Change the kernel to drlnd
+Open Navigation.ipynb <br>
+Change the kernel to drlnd 
