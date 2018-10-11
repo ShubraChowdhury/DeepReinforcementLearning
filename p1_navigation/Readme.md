@@ -44,7 +44,7 @@ cuda90  1.0  h4c72538_0  peterjc123<br>
 torch-0.4.0 (torch-0.4.0-cp36-cp36m-win_amd64.whl)<br>
 torchvision    0.2.1<br>
  pytorch 0.3.1<br>
-<h4>3.</h4> Follow the instructions in this ![Alt text](https://github.com/openai/gym "repository") to perform a minimal install of OpenAI gym.  <br>
+<h4>3. Follow the instructions in this [repository](https://github.com/openai/gym) to perform a minimal install of OpenAI gym. </h4> <br>
  Box2D  2.3.2   <br>
 Box2D-kengz  2.3.3<br>
 atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
