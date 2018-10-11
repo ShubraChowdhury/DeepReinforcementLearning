@@ -22,11 +22,33 @@ To set up your python environment to run the code in this repository, follow the
 
 <h3>Windows: </h3>
 <li>1. Create (and activate) a new environment with Python 3.6.
+  <br>
 conda create --name drlnd python=3.6 
+  <br>
 activate drlnd
-<li>2. Install belowmentioned python packages
-Next Install Following packages :
-tensorflow
-Tensorflow-gpu
-pytorch
-torch
+<li>2. Install below mentioned python packages
+  <br>
+matplotlib 2.2.2  <br>
+numpy 1.14.3 <br>
+scipy 1.1.0<br>
+pandas  0.23.0<br>
+jupyter   1.0.0 <br> 
+ipykernel  4.8.2 <br> 
+ipython   6.4.0  <br>
+libboost    1.65.1 <br> 
+llvmlite    0.23.1 <br> 
+docopt  0.6.2<br>
+cython   0.28.2<br>
+tensorflow==1.7.1<br>
+cuda90  1.0  h4c72538_0  peterjc123<br>
+torch-0.4.0 (torch-0.4.0-cp36-cp36m-win_amd64.whl)<br>
+torchvision    0.2.1<br>
+ pytorch 0.3.1<br>
+<li>3. Follow the instructions in this ![alt text](https://github.com/openai/gym "repository") to perform a minimal install of OpenAI gym.  <br>
+ Box2D  2.3.2   <br>
+Box2D-kengz  2.3.3<br>
+atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
+<li>4. Clone the repository deep-reinforcement-learning.git<br>
+  git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
+cd deep-reinforcement-learning/python<br>
+pip install .<br>
