@@ -20,14 +20,14 @@ The task is episodic, and in order to solve the environment, your agent must get
 
 To set up your python environment to run the code in this repository, follow the instructions below.
 
-<h3>For Installation Windows with GPU </h3><br>
+<h3>For Installation Windows with GPU </h3>
 <h4>1. Create (and activate) a new environment with Python 3.6.</h4>
-  <br>
+
 conda create --name drlnd python=3.6 
   <br>
 activate drlnd<br>
 <h4>2. Install below mentioned python packages</h4>
-  <br>
+ 
 matplotlib 2.2.2  <br>
 numpy 1.14.3 <br>
 scipy 1.1.0<br>
@@ -44,7 +44,7 @@ cuda90  1.0  h4c72538_0  peterjc123<br>
 torch-0.4.0 (torch-0.4.0-cp36-cp36m-win_amd64.whl)<br>
 torchvision    0.2.1<br>
  pytorch 0.3.1<br>
-<h4>3. Follow the instructions in this [repository](https://github.com/openai/gym) to perform a minimal install of OpenAI gym. </h4> <br>
+<h4>3. Follow the instructions in this <a href="https://github.com/openai/gym">repository</a> to perform a minimal install of OpenAI gym. </h4> 
  Box2D  2.3.2   <br>
 Box2D-kengz  2.3.3<br>
 atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
