@@ -27,6 +27,11 @@ fc2_units | 100
 
 3. Continuous-Control.ipynb: Contains instructions for how to use the Unity ML-Agents environment,the environments contain brains which are responsible for deciding the actions of their associated agents. Here we check for the first brain available, and set it as the default brain we will be controlling from Python.In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector must be a number between -1 and 1. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
 
+	Saving Model: Notebook saves model at 3 stages 
+	1. Saves for all episode checkpoint_actor_all.pth and checkpoint_critic_all.pth
+	2. Saved after every 100 episode checkpoint_actor.pth and checkpoint_critic.pth
+	3. Saved after score of 30 plus and number of episode equal or greater than 100 checkpoint_actor_plus_30.pth and checkpoint_critic_plus_30.pth
+
 ####   Training using Deep Deterministic Policy Gradient (DDPG)          
 		 def ddpg(n_episodes=1000, max_t=1000, print_every=100,window_size=100):
 		    scores_deque = deque(maxlen=window_size) # last 100 scores
