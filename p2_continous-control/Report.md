@@ -1,7 +1,7 @@
 [//]: # (Image References)
 
-[image1]: https://user-images.githubusercontent.com/15965062/47237461-d2a90b00-d3e7-11e8-96a0-f0c9a0b7ad1d.png "Algorithm"
-[image2]: https://user-images.githubusercontent.com/15965062/47245012-40613100-d400-11e8-904e-5b732c8c2871.png "Plot of Rewards"
+[image1]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p2_continous-control/DDGP_ALGO.PNG "Algo"
+[image2]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p2_continous-control/DDGP_OUTPUT.PNG "Plot"
 
 # Report - Deep RL Project: Continuous Control
 
@@ -89,7 +89,7 @@ References:
 
 3. Algorithm details: 
 
-![Algorithm][image1]
+![Algo][image1]
 
 
 4. Short explanation (refer to the papers for further details):
@@ -168,7 +168,7 @@ Episode 255| Average Score:30.09 Window Size:(100)|Epi Score:27.95| Max Score: 3
 Environment solved in 255 episodes!	Average Score: 30.09, total training time: 5173.3459 seconds
 
 
-![Plot of Rewards][image2]
+![Plot][image2]
 
 ###  Ideas for future work
 
