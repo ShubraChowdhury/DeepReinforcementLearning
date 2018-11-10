@@ -7,9 +7,9 @@
 
 ### Implementation Details
 
-There are 3 main files 'ddpg_agent.py' and 'model.py', and  'Continuous-Control.ipynb'. 
+There are 3 main files ddpg_agent.py and model.py, and  Continuous-Control.ipynb. 
 
-1. 'model.py': Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
+1. model.py: Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
     Actor model has 2 fully connected layer and Critic has 3 fully connected layer. In both case a 1D batch normal has been used.
 
 Actor Model | Value
@@ -23,9 +23,9 @@ fc1_units | 400
 fc2_units | 300 
 fc2_units | 100
 
-2. 'ddpg_agent.py': Implements the agent class, which includes the logic for the stepping, acting, learning and the buffer to hold the experience data on which to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
+2. ddpg_agent.py: This program implements Agent class and OUNoise, Agent includes step() which saves experience in replay memory and use random sample from buffer to learn, act() which returns actions for given state as per current policy, learn() which Update policy and value parameters using given batch of experience tuples  which is used  to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
 
-3. 'Continuous-Control.ipynb': Main training logic and usage instructions. Includes explainations about the environment, state and action space, goals and final results. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
+3. Continuous-Control.ipynb: Main training logic and usage instructions. Includes explainations about the environment, state and action space, goals and final results. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
 
 ### Learning Algorithm
 
