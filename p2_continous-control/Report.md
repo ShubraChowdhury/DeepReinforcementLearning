@@ -25,8 +25,59 @@ fc2_units | 100
 
 2. ddpg_agent.py: This program implements Agent class and OUNoise, Agent includes step() which saves experience in replay memory and use random sample from buffer to learn, act() which returns actions for given state as per current policy, learn() which Update policy and value parameters using given batch of experience tuples  which is used  to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
 
-3. Continuous-Control.ipynb: Main training logic and usage instructions. Includes explainations about the environment, state and action space, goals and final results. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
+3. Continuous-Control.ipynb: Contains instructions for how to use the Unity ML-Agents environment,the environments contain brains which are responsible for deciding the actions of their associated agents. Here we check for the first brain available, and set it as the default brain we will be controlling from Python.In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector must be a number between -1 and 1. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
 
+####   Training using Deep Deterministic Policy Gradient (DDPG)          
+		 def ddpg(n_episodes=1000, max_t=1000, print_every=100,window_size=100):
+		    scores_deque = deque(maxlen=window_size) # last 100 scores
+		    episode_score_list = []                  # list containing scores from each episode
+		    Overall_average = []                     #List of 100/window mean scores
+		    scores = np.zeros(num_agents)            # initialize the score (for each agent)
+		    start_time = time.time()
+
+		    for i_episode in range(1, n_episodes+1):
+			env_info = env.reset(train_mode=True)[brain_name]     # reset the environment 
+			states = env_info.vector_observations                  # get the current state (for each agent)
+			scores = np.zeros(num_agents)                          # initialize the score (for each agent)
+			agent.reset()
+
+			average_score = 0
+			time_step = time.time()
+			for ts in range(max_t):
+			    actions = agent.act(states, add_noise=True)        # select an action (for each agent)
+			    env_info = env.step(actions)[brain_name]           # send action to  environment
+			    next_states = env_info.vector_observations         # get next state (for each agent)
+			    rewards = env_info.rewards                         # get reward (for each agent)
+			    dones = env_info.local_done                        # see if episode finished
+			    scores += env_info.rewards                         # update the score (for each agent)
+			    for state, action, reward, next_state, done in zip(states, actions, rewards, next_states, dones):
+				agent.step(state, action, reward, next_state, done,ts)
+			    states = next_states                               # roll over states to next time step
+			    if np.any(dones):                                  # exit loop if episode finished
+				break
+			episode_score_list.append(scores) # List of all scores in Episodde for agents
+			scores_deque.append(scores)    # Making a of  window of 100 scores
+			average_score = np.mean(scores_deque)  # Average/mean of  100/window 
+			Overall_average.append(average_score)  # List of 100/window mean scores
+			print('\rEpisode {}, Average Score:{:.2f} Window Size:({:d}),Epi Score:{:.2f}, Max Score: {:.2f}, Min Score: {:.2f},Time per Episode: {:.2f}'\
+			      .format(i_episode, average_score,len(scores_deque),np.max(scores), np.max(scores_deque),np.min(scores_deque), time.time() - time_step), end="\n")
+			torch.save(agent.actor_local.state_dict(), 'checkpoint_actor_all.pth')
+			torch.save(agent.critic_local.state_dict(), 'checkpoint_critic_all.pth')
+
+			if i_episode % print_every == 0:
+			    torch.save(agent.actor_local.state_dict(), 'checkpoint_actor.pth')
+			    torch.save(agent.critic_local.state_dict(), 'checkpoint_critic.pth')
+			    print('\rEpisode {}\tAverage Window Score for a window of 100: {:.2f}'.format(i_episode, average_score))   
+
+			if average_score >= 30.0 and i_episode >= 100 :  
+				end_time = time.time()
+				torch.save(agent.actor_local.state_dict(), 'checkpoint_actor_plus_30.pth')
+				torch.save(agent.critic_local.state_dict(), 'checkpoint_critic_plus_30.pth')
+				print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}, training time: {}'\
+				      .format(i_episode, average_score, end_time-start_time))
+				break
+
+		    return episode_score_list, Overall_average
 ### Learning Algorithm
 
 The agent is trained using the DDPG algorithm.
