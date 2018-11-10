@@ -16,14 +16,14 @@ In this environment, a double-jointed arm can move to target locations. A reward
 
 The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
 
-### Distributed Training
+### Training
 
 For this project, we have first version that contains a single agent of the Unity environment:
 
 
-#### Option 1: Solve the First Version
+#### Solve Status
 
-The task is episodic, and in order to solve the environment,  your agent must get an average score of +30 over 100 consecutive episodes.
+The task is episodic, and in order to solve the environment,   agent must get an average score of +30 over 100 consecutive episodes.
 <h2>Installation</h2>
 
 To set up your python environment to run the code in this repository, follow the instructions below.
