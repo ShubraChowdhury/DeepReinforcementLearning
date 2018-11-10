@@ -57,6 +57,6 @@ pip install .<br>
 <h4>5. Download the Unity Environment</h4>
 Windows (64-bit): click  <a href="https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip"> here </a><br>
 Then, place the file in the p1_navigation/ folder in the DRLND GitHub repository, and unzip (or decompress) the file.
-<h4>5. Run jupyternotebook</h4>
+<h4>6. Run jupyternotebook</h4>
 Open Navigation.ipynb <br>
 Change the kernel to drlnd 
