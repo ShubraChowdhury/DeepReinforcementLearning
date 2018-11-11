@@ -3,7 +3,7 @@
 [image1]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p2_continous-control/DDGP_ALGO.PNG "Algo"
 [image2]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p2_continous-control/DDGP_OUTPUT.PNG "Plot"
 
-# Report - Deep RL Project: Continuous Control
+# Report - DDPG: Continuous Control
 
 ### Implementation Details
 
