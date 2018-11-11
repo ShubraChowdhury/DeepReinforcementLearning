@@ -28,7 +28,7 @@ The task is episodic, and in order to solve the environment,   agent must get an
 
 To set up your python environment to run the code in this repository, follow the instructions below.
 
-<h3>For Installation Windows 64 bit with GPU </h3>
+<h3>For Installation Windows 64 bit with GPU (Windows 10 ) </h3>
 <h4>1. Create (and activate) a new environment with Python 3.6.</h4>
 
 conda create --name drlnd python=3.6 
