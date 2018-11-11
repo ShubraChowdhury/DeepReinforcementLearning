@@ -10,19 +10,19 @@
 There are 3 main files ddpg_agent.py and model.py, and  Continuous-Control.ipynb. 
 
 1. model.py: Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
-    Actor model has 2 fully connected layer and Critic has 3 fully connected layer. In both case a 1D batch normal has been used.
+    Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 3 fully connected layer (of 400, 300 and 100 units). In both case a 1D batch normal has been used.Input and output layers sizes are determined by the state and action space.
 
-Actor Model | Value
+Actor Model/Network architecture | Value
 --- | ---
 fc1_units | 400  
 fc2_units | 300 
 
-Critic Model | Value
+Critic Model/Network architecture | Value
 --- | ---
 fc1_units | 400  
 fc2_units | 300 
 fc2_units | 100
-
+    
 2. ddpg_agent.py: This program implements Agent class and OUNoise, Agent includes step() which saves experience in replay memory and use random sample from buffer to learn, act() which returns actions for given state as per current policy, learn() which Update policy and value parameters using given batch of experience tuples  which is used  to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
 
 3. Continuous-Control.ipynb: Contains instructions for how to use the Unity ML-Agents environment,the environments contain brains which are responsible for deciding the actions of their associated agents. Here we check for the first brain available, and set it as the default brain we will be controlling from Python.In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector must be a number between -1 and 1. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
@@ -31,6 +31,24 @@ fc2_units | 100
 	1. Saves for all episode checkpoint_actor_all.pth and checkpoint_critic_all.pth
 	2. Saved after every 100 episode checkpoint_actor.pth and checkpoint_critic.pth
 	3. Saved after score of 30 plus and number of episode equal or greater than 100 checkpoint_actor_plus_30.pth and checkpoint_critic_plus_30.pth
+
+
+### Learning Algorithm
+
+The agent is trained using the DDPG algorithm which is an off-policy algorithm. It is not possible to straightforwardly apply Q-learning to continuous action spaces, because in continuous spaces finding the greedy policy requires an optimization of at at every timestep; this optimization is too slow to be practical with large, unconstrained function approximators and nontrivial action spaces. Instead DDPG is an actor-critic approach based on the DPG algorithm (Silveret al., 2014).
+The DPG algorithm maintains a parameterized actor function {mu(s|theta to power mu)} which specifies the current policy by deterministically mapping states to a specific action. The critic Q(s; a) is learned using the Bellman equation as in Q-learning. The actor is updated by following the applying the chain rule to the expected return from the start distribution J with respect to the actor parameters.
+
+As with Q learning, introducing non-linear function approximators means that convergence is no longer guaranteed. However, such approximators appear essential in order to learn and generalize on large state spaces. NFQCA (Hafner & Riedmiller, 2011), which uses the same update rules as DPG but with neural network function approximators, uses batch learning for stability, which is intractable for large networks. A minibatch version of NFQCA which does not reset the policy at each update, as would be required to scale to large networks, is equivalent to the original DPG. DDGP is modifications to DPG, inspired by the success of DQN, which allow it to use neural network function approximators to learn in large state and action spaces online.
+
+One challenge when using neural networks for reinforcement learning is that most optimization algorithms assume that the samples are independently and identically distributed. When the samples are generated from exploring sequentially in an environment this assumption no longer holds. Additionally, to make efficient use of hardware optimizations, it is essential to learn in minibatches, rather than online.
+
+As in DQN, DDPG uses replay buffer to address these issues. The replay buffer is a finite sized cache R. Transitions were sampled from the environment according to the exploration policy and the tuple (st; at; rt; st+1) was stored in the replay buffer. When the replay buffer was full the oldest samples were discarded. At each timestep the actor and critic are updated by sampling a minibatch uniformly
+from the buffer. Because DDPG is an off-policy algorithm, the replay buffer can be large, allowing the algorithm to benefit from learning across a set of uncorrelated transitions.
+
+A major challenge of learning in continuous action spaces is exploration. An advantage of off policies  algorithms such as DDPG is that it can treat the problem of exploration independently from the learning algorithm.
+
+![Algo][image1]
+
 
 ####   Training using Deep Deterministic Policy Gradient (DDPG)          
 		 def ddpg(n_episodes=1000, max_t=1000, print_every=100,window_size=100):
@@ -83,32 +101,8 @@ fc2_units | 100
 				break
 
 		    return episode_score_list, Overall_average
-### Learning Algorithm
-
-The agent is trained using the DDPG algorithm.
-
-References:
-1. [DDPG Paper](https://arxiv.org/pdf/1509.02971.pdf)
-
-2. [DDPG-pendulum implementation](https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum)
-
-3. Algorithm details: 
-
-![Algo][image1]
-
-
-4. Short explanation (refer to the papers for further details):
-    - Q-Learning is not straighforwardly applied to continuous tasks due to the argmax operation over infinite actions in the continuous domain. DDPG can be viewed as an extension of Q-learning to continuous tasks.
-
-    - DDPG was introduced as an actor-critic algorithm, although the roles of the actor and critic here are a bit different then the classic actor-critic algorithms. Here, the actor implements a current policy to deterministically map states to a specific "best" action. The critic implemets the Q function, and is trained using the same paradigm as in Q-learning, with the next action in the Bellman equation given from the actor's output. The actor is trained by the gradient from maximizing the estimated Q-value from the critic, when the actor's best predicted action is used as input to the critic.
     
-    - As in Deep Q-learning, DDPG also implements a replay buffer to gather experiences from the agent (or the multiple parallel agents in the 2nd version of the stated environment). 
-    
-    - In order to encourage exploration during training, Ornstein-Uhlenbeck noise is added to the actors selected actions. I also needed to decay this noise using an epsilon hyperparameter to achieve best results.
-    
-    - Another fine detail is the use of soft updates (parameterized by tau below) to the target networks instead of hard updates as in the original DQN paper. 
-    
-5. Hyperparameters:
+### Hyperparameters:
 
 Parameters | Value
 --- | ---
@@ -131,11 +125,7 @@ Print every |100
 Deque Window |100 
 
 
-6. Network architecture:
-    - Both the actor and critic are implemented using fully connected networks, with 2 hidden layers of 128 units each, batch normalization and Relu activation function, with Tanh activation at the last layer.
-    - Input and output layers sizes are determined by the state and action space.
-    - Training time until solving the environment takes around 38 minutes on AWS p2 instance with Tesla k80 GPU.
-    - See 'model.py' for more details.
+
 
 ### Plot of results
 
@@ -182,3 +172,14 @@ Environment solved in 255 episodes!	Average Score: 30.09, total training time: 5
 2. Solving the more challenging [Crawler](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#crawler) environment using edited versions of these same algorithms. 
 
 I'll at least do PPO and attempts to solve the Crawler environment after submission of this project (due to Udacity project submission rules).
+
+### References:
+1. [DDPG Paper](https://arxiv.org/pdf/1509.02971.pdf)
+
+2. [DDPG-pendulum implementation](https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum)
+
+3. Udacity code guidance for agent and model (ddpg_agent.py and model.py)
+
+4. Reinforcement Learning Book by Richard S. Sutton  and Andrew G. Barto
+
+5. [Silver Lever Nicolas Heess, Thomas Degris, Daan Wierstra, Martin Riedmiller ](http://proceedings.mlr.press/v32/silver14.pdf)
