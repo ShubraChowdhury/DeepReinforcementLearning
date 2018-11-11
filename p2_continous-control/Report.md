@@ -10,7 +10,7 @@
 There are 3 main files ddpg_agent.py and model.py, and  Continuous-Control.ipynb. 
 
 1. model.py: Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
-    Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 3 fully connected layer (of 400, 300 and 100 units). In both case a 1D batch normal has been used.Input and output layers sizes are determined by the state and action space.
+    Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 3 fully connected layer (of 400, 300 and 100 units). In both case a 1D batch normalization has been used.Input and output layers sizes are determined by the state and action space.
 
 Actor Model/Network architecture | Value
 --- | ---
@@ -47,10 +47,11 @@ from the buffer. Because DDPG is an off-policy algorithm, the replay buffer can 
 
 A major challenge of learning in continuous action spaces is exploration. An advantage of off policies  algorithms such as DDPG is that it can treat the problem of exploration independently from the learning algorithm.
 
+###  Sudo Code Explanation 
 ![Algo][image1]
 
 
-####   Training using Deep Deterministic Policy Gradient (DDPG)          
+###   Training using Deep Deterministic Policy Gradient (DDPG)          
 		 def ddpg(n_episodes=1000, max_t=1000, print_every=100,window_size=100):
 		    scores_deque = deque(maxlen=window_size) # last 100 scores
 		    episode_score_list = []                  # list containing scores from each episode
@@ -127,9 +128,8 @@ Deque Window |100
 
 
 
-### Plot of results
+### Training Output With Average Scores
 
-As seen below, the environment is solved after 129 episodes (average over agents over episodes 30-129 > 30.0), and achieves best average score of above 37.
 
 Episodes | Average Score |Window Size|Max Episode Score| Max Deque| Min Deque| Time
 --- | --- | --- | --- | ---| --- | --- 
@@ -162,16 +162,13 @@ Episode 255| Average Score:30.09 Window Size:(100)|Epi Score:27.95| Max Score: 3
 
 Environment solved in 255 episodes!	Average Score: 30.09, total training time: 5173.3459 seconds
 
-
+### Training Reward/Score Plot
 ![Plot][image2]
 
 ###  Ideas for future work
 
-1. This DDPG implementation was very dependent on hyperparameter, noise settings and random seed. Solving the environment using PPO, TRPO or D4PG might allow a more robust solution to this task.
+I will try  test and implement PPO or D4PG  on Udacity's [Crawler](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#crawler) environment to minimize dependencies on hyperparameter and noise,  
 
-2. Solving the more challenging [Crawler](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#crawler) environment using edited versions of these same algorithms. 
-
-I'll at least do PPO and attempts to solve the Crawler environment after submission of this project (due to Udacity project submission rules).
 
 ### References:
 1. [DDPG Paper](https://arxiv.org/pdf/1509.02971.pdf)
