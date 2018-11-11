@@ -81,4 +81,14 @@ pip install .<br>
 Follow the instructions in `Continuous_Control.ipynb` to get started with training your own agent!  
 
 
+### References:
+1. [DDPG Paper](https://arxiv.org/pdf/1509.02971.pdf)
+
+2. [DDPG-pendulum implementation](https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum)
+
+3. Udacity code guidance for agent and model (ddpg_agent.py and model.py)
+
+4. Reinforcement Learning Book by Richard S. Sutton  and Andrew G. Barto
+
+5. [Silver Lever Nicolas Heess, Thomas Degris, Daan Wierstra, Martin Riedmiller ](http://proceedings.mlr.press/v32/silver14.pdf)
 
