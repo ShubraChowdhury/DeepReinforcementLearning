@@ -47,12 +47,11 @@ fc2_units | 100
     
 2. ddpg_agent.py: This program implements Agent class and OUNoise, Agent includes step_and_buff() which saves experience in replay memory and use random sample from buffer to learn, act() which returns actions for given state as per current policy, learn() which Update policy and value parameters using given batch of experience tuples  which is used  to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
 
-3. Continuous-Control.ipynb: Contains instructions for how to use the Unity ML-Agents environment,the environments contain brains which are responsible for deciding the actions of their associated agents. Here we check for the first brain available, and set it as the default brain we will be controlling from Python.In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector must be a number between -1 and 1. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
+3. Tennis.ipynb: Contains instructions for how to use the Unity ML-Agents environment,the environments contain brains which are responsible for deciding the actions of their associated agents. Here we check for the first brain available, and set it as the default brain we will be controlling from Python.In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. The main training loop creates an agent and trains it using the DDPG (details below) until satisfactory results. 
 
-	Saving Model: Notebook saves model at 3 stages 
-	1. Saves for all episode checkpoint_actor_all.pth and checkpoint_critic_all.pth
-	2. Saved after every 100 episode checkpoint_actor.pth and checkpoint_critic.pth
-	3. Saved after score of 30 plus and number of episode equal or greater than 100 checkpoint_actor_plus_30.pth and checkpoint_critic_plus_30.pth
+	Saving Model: Notebook saves model for both actor and critic for both agents
+	1. Saved after every 100 episode actor_checkpoint_0.pth, actor_checkpoint_1.pth and critic_checkpoint_0.pth , critic_checkpoint_1.pth
+	
 
 
 ### Learning Algorithm
