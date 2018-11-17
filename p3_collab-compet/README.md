@@ -16,12 +16,48 @@ In this environment, two agents control rackets to bounce a ball over a net. If 
 
 The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
 
+#### Solve Status
 The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
 
 - After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
 - This yields a single **score** for each episode.
 
 The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
+
+To set up your python environment to run the code in this repository, follow the instructions below.
+
+<h3>For Installation Windows 64 bit with GPU (Windows 10 ) </h3>
+<h4>1. Create (and activate) a new environment with Python 3.6.</h4>
+
+conda create --name drlnd python=3.6 
+  <br>
+activate drlnd<br>
+<h4>2. Install below mentioned python packages</h4>
+ 
+matplotlib 2.2.2  <br>
+numpy 1.14.3 <br>
+scipy 1.1.0<br>
+pandas  0.23.0<br>
+jupyter   1.0.0 <br> 
+ipykernel  4.8.2 <br> 
+ipython   6.4.0  <br>
+libboost    1.65.1 <br> 
+llvmlite    0.23.1 <br> 
+docopt  0.6.2<br>
+cython   0.28.2<br>
+tensorflow==1.7.1<br>
+cuda90  1.0  h4c72538_0  peterjc123<br>
+torch-0.4.0 (torch-0.4.0-cp36-cp36m-win_amd64.whl)<br>
+torchvision    0.2.1<br>
+ pytorch 0.3.1<br>
+<h4>3. Follow the instructions in this <a href="https://github.com/openai/gym">repository</a> to perform a minimal install of OpenAI gym. </h4> 
+ Box2D  2.3.2   <br>
+Box2D-kengz  2.3.3<br>
+atari-py 0.1.1 (atari_py-0.1.1-cp36-cp36m-win_amd64.whl )<br>
+<h4>4. Clone the repository deep-reinforcement-learning.git</h4>
+  git clone https://github.com/udacity/deep-reinforcement-learning.git<br>
+cd deep-reinforcement-learning/python<br>
+pip install .<br>
 
 ### Getting Started
 
