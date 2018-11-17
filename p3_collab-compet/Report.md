@@ -28,7 +28,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 ### Implementation Details
 
-There are 3 main files ddpg_agent.py and model.py, and  Continuous-Control.ipynb. 
+There are 3 main files ddpg_agent.py and model.py, and  Tennis.ipynb. 
 
 1. model.py: Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
     Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 3 fully connected layer (of 400, 300 and 100 units). In both case a 1D batch normalization has been used.Input and output layers sizes are determined by the state and action space.
