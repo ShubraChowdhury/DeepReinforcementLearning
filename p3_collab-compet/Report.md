@@ -147,19 +147,19 @@ A major challenge of learning in continuous action spaces is exploration. An adv
 Parameters | Value
 --- | ---
 Replay buffer size | int(1e6)
-Minibatch size | 512
+Minibatch size | 1024
 Discount factor | 0.99  
 Tau (soft update) | 1e-3
-Learning rate actor | 1e-3
+Learning rate actor | 2e-4
 Learning rate critic | 1e-3
-L2 weight decay | 0
-Noise Sigma | 0.05
+L2 weight decay | 0.001
+Noise Sigma | 0.2
 Theta | 0.15
 Mu | 0
 
 Training Parameters | Value
 --- | ---
-Number of episodes | 1000
+Number of episodes | 2000
 Max_t | 1000
 Print every |100
 Deque Window |100 
@@ -170,36 +170,24 @@ Deque Window |100
 ### Training Output With Average Scores
 
 
-Episodes | Average Score |Window Size|Max Episode Score| Max Deque| Min Deque| Time
---- | --- | --- | --- | ---| --- | --- 
---- | --- | --- | --- | ---| --- | ---
-Episode 1| Average Score:0.54 |Window Size:(1)|Epi Score:0.54| Max Score: 0.54| Min Score: 0.54 |Time per Episode: 12.81
-Episode 2| Average Score:0.30 |Window Size:(2)|Epi Score:0.07| Max Score: 0.54| Min Score: 0.07|Time per Episode: 19.17
-Episode 3| Average Score:0.35 |Window Size:(3)|Epi Score:0.43| Max Score: 0.54| Min Score: 0.07|Time per Episode: 19.14
-Episode 173| Average Score:18.10 |Window Size:(100)|Epi Score:31.95| Max Score: 37.94| Min Score: 4.87|Time per Episode: 20.30
-Episode 174| Average Score:18.21 |Window Size:(100)|Epi Score:19.14| Max Score: 37.94| Min Score: 4.87|Time per Episode: 20.43
-Episode 175| Average Score:18.52 |Window Size:(100)|Epi Score:35.92| Max Score: 37.94| Min Score: 6.00|Time per Episode: 20.54
-Episode 176| Average Score:18.74 |Window Size:(100)|Epi Score:28.70| Max Score: 37.94| Min Score: 6.00|Time per Episode: 20.49
-Episode 177| Average Score:18.92 |Window Size:(100)|Epi Score:29.70| Max Score: 37.94| Min Score: 6.00|Time per Episode: 20.45
-Episode 178| Average Score:19.10 |Window Size:(100)|Epi Score:24.35| Max Score: 37.94| Min Score: 6.00|Time per Episode: 20.45
-Episode 179| Average Score:19.28 |Window Size:(100)|Epi Score:23.77| Max Score: 37.94| Min Score: 6.37|Time per Episode: 20.52
-Episode 180| Average Score:19.45 |Window Size:(100)|Epi Score:27.18| Max Score: 37.94| Min Score: 6.37|Time per Episode: 20.66
-Episode 181| Average Score:19.71 |Window Size:(100)|Epi Score:34.58| Max Score: 37.94| Min Score: 6.37|Time per Episode: 20.72
-Episode 244| Average Score:29.57 Window Size:(100)|Epi Score:31.44| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.38
-Episode 245| Average Score:29.69 Window Size:(100)|Epi Score:33.36| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.44
-Episode 246| Average Score:29.81 Window Size:(100)|Epi Score:36.15| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.56
-Episode 247| Average Score:29.87 Window Size:(100)|Epi Score:34.11| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.49
-Episode 248| Average Score:29.82 Window Size:(100)|Epi Score:25.55| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.52
-Episode 249| Average Score:29.88 Window Size:(100)|Epi Score:36.02| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.47
-Episode 250| Average Score:29.76 Window Size:(100)|Epi Score:13.99| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.59
-Episode 251| Average Score:29.79 Window Size:(100)|Epi Score:32.33| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.62
-Episode 252| Average Score:29.85 Window Size:(100)|Epi Score:29.69| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.63
-Episode 253| Average Score:29.88 Window Size:(100)|Epi Score:30.85| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.51
-Episode 254| Average Score:29.96 Window Size:(100)|Epi Score:34.43| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.49
-Episode 255| Average Score:30.09 Window Size:(100)|Epi Score:27.95| Max Score: 38.43| Min Score: 6.68|Time per Episode: 21.55
+Episodes | Episode Score |Average Score
+--- | --- | --- 
+--- | --- | --- 
+Episode:100|Episode Score:0.00|Average Score:0.0029
+Episode:200|Episode Score:0.00|Average Score:0.0000
+Episode:300|Episode Score:0.10|Average Score:0.0095
+Episode:400|Episode Score:0.10|Average Score:0.0105
+Episode:500|Episode Score:0.00|Average Score:0.0535
+Episode:600|Episode Score:0.09|Average Score:0.0555
+Episode:700|Episode Score:0.09|Average Score:0.0310
+Episode:800|Episode Score:0.10|Average Score:0.0489
+Episode:900|Episode Score:0.10|Average Score:0.0535
+Episode:1000|Episode Score:0.40|Average Score:0.0736
+Episode:1100|Episode Score:0.10|Average Score:0.0673
+Episode:1200|Episode Score:0.00|Average Score:0.1210
 
 
-Environment solved in 255 episodes!	Average Score: 30.09, total training time: 5173.3459 seconds
+Environment solved in xxx episodes!	Average Score: xxx, total training time: xxxx seconds
 
 ### Training Reward/Score Plot
 ![Plot][image2]
