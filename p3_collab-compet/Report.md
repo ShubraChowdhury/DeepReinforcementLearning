@@ -200,7 +200,8 @@ Maximum Average Score (over 100 episodes): 2.1498  at Episode: 1542
 
 ###  Ideas for future work
 
-I will try  test and implement PPO or D4PG  on Udacity's [Crawler](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#crawler) environment to minimize dependencies on hyperparameter and noise,  
+First I will have to do a major improvement  with hyperparameters , check  what can be the  replay buffer size for consistent maximum scores. Second I will work on improving the model so that when its run on Windows and Linux it should produce the same results (at this point my Linux model fails to perform well when run on and same with windows model).
+Third implementing Prioritized Experience Replay.
 
 
 ### References:
@@ -213,3 +214,7 @@ I will try  test and implement PPO or D4PG  on Udacity's [Crawler](https://githu
 4. Reinforcement Learning Book by Richard S. Sutton  and Andrew G. Barto
 
 5. [Silver Lever Nicolas Heess, Thomas Degris, Daan Wierstra, Martin Riedmiller ](http://proceedings.mlr.press/v32/silver14.pdf)
+
+6.[TRPO & PPO](https://medium.com/@sanketgujar95/trust-region-policy-optimization-trpo-and-proximal-policy-optimization-ppo-e6e7075f39ed)
+
+7. [A3C](https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-8-asynchronous-actor-critic-agents-a3c-c88f72a5e9f2)
