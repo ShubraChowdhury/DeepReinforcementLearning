@@ -202,7 +202,7 @@ Maximum Average Score (over 100 episodes): 2.1498  at Episode: 1542
 
 First I will have to do a major improvement  with hyperparameters , check  what can be the  replay buffer size for consistent maximum scores. 
 
-Second I will work on improving the model so that when its run on Windows and Linux it should produce the same results (at this point my Linux model fails to perform well when run on and same with windows model).
+Second I will work on improving the model so that when its run on Windows and Linux it should produce the same results (at this point my Linux model fails to perform well when run on windows  and same is true  with windows model).
 
 Third implementing Prioritized Experience Replay(https://arxiv.org/abs/1511.05952?context=cs), (https://github.com/qfettes/DeepRL-Tutorials)
 
