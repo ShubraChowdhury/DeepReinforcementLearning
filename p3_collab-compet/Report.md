@@ -73,72 +73,72 @@ A major challenge of learning in continuous action spaces is exploration. An adv
 
 
 ###   Training using Deep Deterministic Policy Gradient (DDPG)          
-			def ddpg(n_episodes=2000, max_t=1000,print_every=100,window_size=100):
-			    scores_deque = deque(maxlen=window_size) # last 100 scores
-			    scores_list = []
-			    average_score_list = []
-			    excess_episode =100
-			    excess_average_score = 0.2
-			    env_solv = False
-			    episode_required = 0 # Go 100 more episode beyond episode when environment is solved ==n_episodes
-			    maximum_average_score = 0 # maximum average score including episode_required
-			    maximum_episode = 0 # episode at which i get maximum_average_score
+def ddpg(n_episodes=5000, max_t=1000,print_every=100,window_size=100):
+	    scores_deque = deque(maxlen=window_size) # last 100 scores
+	    scores_list = []
+	    average_score_list = []
+	    excess_episode =500
+	    excess_average_score = 0.5
+	    env_solv = False
+	    episode_required = 0 # Go 100 more episode beyond episode when environment is solved ==n_episodes
+	    maximum_average_score = 0 # maximum average score including episode_required
+	    maximum_episode = 0 # episode at which i get maximum_average_score
 
-			    start_time = time.time()
-			    for i_episode in range(1, n_episodes+1):
-				scores = np.zeros(num_agents)
-				env_info = env.reset(train_mode=True)[brain_name]
-				states = env_info.vector_observations                  # get the current state (for each agent)
-				agent.reset()
+	    start_time = time.time()
+	    for i_episode in range(1, n_episodes+1):
+		scores = np.zeros(num_agents)
+		env_info = env.reset(train_mode=True)[brain_name]
+		states = env_info.vector_observations                  # get the current state (for each agent)
+		agent.reset()
 
-				for ts in range(max_t):
-				    actions = agent.act(states)
-				    env_info = env.step(actions)[brain_name]
-				    next_states = env_info.vector_observations         # get next state (for each agent)
-				    rewards = env_info.rewards                         # get reward (for each agent)
-				    dones = env_info.local_done                        # see if episode finished
-
-
-				    agent.step_and_buff(states, actions, rewards, next_states, dones,ts)
-				    states  = next_states
-				    scores += rewards                                  # update the score (for each agent)
-				    if np.any(dones):                                  # exit loop if episode finished
-					break
-
-				score = np.max(scores)        
-				scores_list.append(score)
-				scores_deque.append(score)
-
-				average_score = np.average(scores_deque)
-				average_score_list.append(average_score)   
-
-				print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score), end="")
-				if i_episode >= 100:
-				    if not env_solv:
-					if average_score >= 0.5:
-					    end_time = time.time()
-					    print("........Environment solved", "in  time {:.2f}".format( end_time-start_time))
-					    episode_required = i_episode + excess_episode
-					    env_solv = True
-				    elif maximum_average_score < average_score:
-					maximum_average_score = average_score
-					maximum_episode = i_episode
+		for ts in range(max_t):
+		    actions = agent.act(states)
+		    env_info = env.step(actions)[brain_name]
+		    next_states = env_info.vector_observations         # get next state (for each agent)
+		    rewards = env_info.rewards                         # get reward (for each agent)
+		    dones = env_info.local_done                        # see if episode finished
 
 
-				if i_episode % print_every == 0:
-				    print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score))
-				    for idx, agent_name in enumerate(agent_object):
-					torch.save(agent_name.actor_local.state_dict(), "actor_checkpoint_" + str(idx) + ".pth")
-					torch.save(agent_name.critic_local.state_dict(), "critic_checkpoint_" + str(idx) + ".pth")            
+		    agent.step_and_buff(states, actions, rewards, next_states, dones,ts)
+		    states  = next_states
+		    scores += rewards                                  # update the score (for each agent)
+		    if np.any(dones):                                  # exit loop if episode finished
+			break
 
-				if i_episode >= episode_required and average_score + excess_average_score < maximum_average_score:
-					break
+		score = np.max(scores)        
+		scores_list.append(score)
+		scores_deque.append(score)
 
-			    print("\n\rMaximum Average Score (over 100 episodes): {:.4f}  at Episode: {:4d}".format(maximum_average_score,maximum_episode))
+		average_score = np.average(scores_deque)
+		average_score_list.append(average_score)   
 
-			    return scores_list,average_score_list
+		print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score), end="")
+		if i_episode >= 100:
+		    if not env_solv:
+			if average_score >= 0.5:
+			    end_time = time.time()
+			    print("........Environment solved", "in  time {:.2f}".format( end_time-start_time))
+			    episode_required = i_episode + excess_episode
+			    env_solv = True
+		    elif maximum_average_score < average_score:
+			maximum_average_score = average_score
+			maximum_episode = i_episode
 
-			scores,averages = ddpg()
+
+		if i_episode % print_every == 0:
+		    print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score))
+		    for idx, agent_name in enumerate(agent_object):
+			torch.save(agent_name.actor_local.state_dict(), "actor_checkpoint_" + str(idx) + ".pth")
+			torch.save(agent_name.critic_local.state_dict(), "critic_checkpoint_" + str(idx) + ".pth")            
+
+		if i_episode >= episode_required and average_score + excess_average_score < maximum_average_score:
+			break
+	    print()            
+	    print("\n\rMaximum Average Score (over 100 episodes): {:.4f}  at Episode: {:4d}".format(maximum_average_score,maximum_episode))
+
+	    return scores_list,average_score_list
+
+	scores,averages = ddpg()
 
 
     
@@ -146,20 +146,20 @@ A major challenge of learning in continuous action spaces is exploration. An adv
 
 Parameters | Value
 --- | ---
-Replay buffer size | int(1e6)
+Replay buffer size | int(1e9)
 Minibatch size | 1024
 Discount factor | 0.99  
 Tau (soft update) | 1e-3
-Learning rate actor | 2e-4
+Learning rate actor | 1e-4
 Learning rate critic | 1e-3
-L2 weight decay | 0.001
+L2 weight decay | 0.0001
 Noise Sigma | 0.2
 Theta | 0.15
 Mu | 0
 
 Training Parameters | Value
 --- | ---
-Number of episodes | 2000
+Number of episodes | 5000
 Max_t | 1000
 Print every |100
 Deque Window |100 
@@ -173,21 +173,28 @@ Deque Window |100
 Episodes | Episode Score |Average Score
 --- | --- | --- 
 --- | --- | --- 
-Episode:100|Episode Score:0.00|Average Score:0.0029
-Episode:200|Episode Score:0.00|Average Score:0.0000
-Episode:300|Episode Score:0.10|Average Score:0.0095
-Episode:400|Episode Score:0.10|Average Score:0.0105
-Episode:500|Episode Score:0.00|Average Score:0.0535
-Episode:600|Episode Score:0.09|Average Score:0.0555
-Episode:700|Episode Score:0.09|Average Score:0.0310
-Episode:800|Episode Score:0.10|Average Score:0.0489
-Episode:900|Episode Score:0.10|Average Score:0.0535
-Episode:1000|Episode Score:0.40|Average Score:0.0736
-Episode:1100|Episode Score:0.10|Average Score:0.0673
-Episode:1200|Episode Score:0.00|Average Score:0.1210
+  100   | 0.00   | 0.0056
+  200   | 0.00   | 0.0010
+  300   | 0.00   | 0.0000
+  400   | 0.00   | 0.0000
+  500   | 0.09   | 0.0225
+  600   | 0.20   | 0.0460
+  700   | 0.10   | 0.0867
+  800   | 0.10   | 0.1425
+  900   | 0.20   | 0.1836
+ 1000   | 0.10   | 0.2382
+ 1077   | 2.60   | 0.5066........Environment solved in  time 1912.06
+ 1100   | 2.60   | 0.9401
+ 1200   | 2.60   | 1.6532
+ 1300   | 2.60   | 1.9366
+ 1400   | 0.39   | 1.7060
+ 1500   | 1.49   | 1.9726
+ 1600   | 0.10   | 1.9760
+ 1636   | 0.80   | 1.6327
 
 
-Environment solved in xxx episodes!	Average Score: xxx, total training time: xxxx seconds
+Environment solved in 1077 episodes!	Average Score: 0.5066, total training time: 1912.06 seconds
+Maximum Average Score (over 100 episodes): 2.1498  at Episode: 1542
 
 ### Training Reward/Score Plot
 ![Plot][image2]
