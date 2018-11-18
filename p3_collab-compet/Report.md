@@ -74,73 +74,70 @@ A major challenge of learning in continuous action spaces is exploration. An adv
 
 
 ###   Training using Deep Deterministic Policy Gradient (DDPG)          
-def ddpg(n_episodes=5000, max_t=1000,print_every=100,window_size=100):
-	    scores_deque = deque(maxlen=window_size) # last 100 scores
-	    scores_list = []
-	    average_score_list = []
-	    excess_episode =500
-	    excess_average_score = 0.5
-	    env_solv = False
-	    episode_required = 0 # Go 100 more episode beyond episode when environment is solved ==n_episodes
-	    maximum_average_score = 0 # maximum average score including episode_required
-	    maximum_episode = 0 # episode at which i get maximum_average_score
+		def ddpg(n_episodes=5000, max_t=1000,print_every=100,window_size=100):
+		    scores_deque = deque(maxlen=window_size) # last 100 scores
+		    scores_list = []
+		    average_score_list = []
+		    excess_episode =500
+		    excess_average_score = 0.5
+		    env_solv = False
+		    episode_required = 0 # Go 100 more episode beyond episode when environment is solved ==n_episodes
+		    maximum_average_score = 0 # maximum average score including episode_required
+		    maximum_episode = 0 # episode at which i get maximum_average_score
 
-	    start_time = time.time()
-	    for i_episode in range(1, n_episodes+1):
-		scores = np.zeros(num_agents)
-		env_info = env.reset(train_mode=True)[brain_name]
-		states = env_info.vector_observations                  # get the current state (for each agent)
-		agent.reset()
+		    start_time = time.time()
+		    for i_episode in range(1, n_episodes+1):
+			scores = np.zeros(num_agents)
+			env_info = env.reset(train_mode=True)[brain_name]
+			states = env_info.vector_observations                  # get the current state (for each agent)
+			agent.reset()
 
-		for ts in range(max_t):
-		    actions = agent.act(states)
-		    env_info = env.step(actions)[brain_name]
-		    next_states = env_info.vector_observations         # get next state (for each agent)
-		    rewards = env_info.rewards                         # get reward (for each agent)
-		    dones = env_info.local_done                        # see if episode finished
-
-
-		    agent.step_and_buff(states, actions, rewards, next_states, dones,ts)
-		    states  = next_states
-		    scores += rewards                                  # update the score (for each agent)
-		    if np.any(dones):                                  # exit loop if episode finished
-			break
-
-		score = np.max(scores)        
-		scores_list.append(score)
-		scores_deque.append(score)
-
-		average_score = np.average(scores_deque)
-		average_score_list.append(average_score)   
-
-		print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score), end="")
-		if i_episode >= 100:
-		    if not env_solv:
-			if average_score >= 0.5:
-			    end_time = time.time()
-			    print("........Environment solved", "in  time {:.2f}".format( end_time-start_time))
-			    episode_required = i_episode + excess_episode
-			    env_solv = True
-		    elif maximum_average_score < average_score:
-			maximum_average_score = average_score
-			maximum_episode = i_episode
+			for ts in range(max_t):
+			    actions = agent.act(states)
+			    env_info = env.step(actions)[brain_name]
+			    next_states = env_info.vector_observations         # get next state (for each agent)
+			    rewards = env_info.rewards                         # get reward (for each agent)
+			    dones = env_info.local_done                        # see if episode finished
 
 
-		if i_episode % print_every == 0:
-		    print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score))
-		    for idx, agent_name in enumerate(agent_object):
-			torch.save(agent_name.actor_local.state_dict(), "actor_checkpoint_" + str(idx) + ".pth")
-			torch.save(agent_name.critic_local.state_dict(), "critic_checkpoint_" + str(idx) + ".pth")            
+			    agent.step_and_buff(states, actions, rewards, next_states, dones,ts)
+			    states  = next_states
+			    scores += rewards                                  # update the score (for each agent)
+			    if np.any(dones):                                  # exit loop if episode finished
+				break
 
-		if i_episode >= episode_required and average_score + excess_average_score < maximum_average_score:
-			break
-	    print()            
-	    print("\n\rMaximum Average Score (over 100 episodes): {:.4f}  at Episode: {:4d}".format(maximum_average_score,maximum_episode))
+			score = np.max(scores)        
+			scores_list.append(score)
+			scores_deque.append(score)
 
-	    return scores_list,average_score_list
+			average_score = np.average(scores_deque)
+			average_score_list.append(average_score)   
 
-	scores,averages = ddpg()
+			print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score), end="")
+			if i_episode >= 100:
+			    if not env_solv:
+				if average_score >= 0.5:
+				    end_time = time.time()
+				    print("........Environment solved", "in  time {:.2f}".format( end_time-start_time))
+				    episode_required = i_episode + excess_episode
+				    env_solv = True
+			    elif maximum_average_score < average_score:
+				maximum_average_score = average_score
+				maximum_episode = i_episode
 
+
+			if i_episode % print_every == 0:
+			    print("\rEpisode: {:4d}   Episode Score: {:.2f}   Average Score: {:.4f}".format(i_episode,score,average_score))
+			    for idx, agent_name in enumerate(agent_object):
+				torch.save(agent_name.actor_local.state_dict(), "actor_checkpoint_" + str(idx) + ".pth")
+				torch.save(agent_name.critic_local.state_dict(), "critic_checkpoint_" + str(idx) + ".pth")            
+
+			if i_episode >= episode_required and average_score + excess_average_score < maximum_average_score:
+				break
+		    print()            
+		    print("\n\rMaximum Average Score (over 100 episodes): {:.4f}  at Episode: {:4d}".format(maximum_average_score,maximum_episode))
+
+		    return scores_list,average_score_list
 
     
 ### Hyperparameters:
