@@ -3,6 +3,7 @@
 [image1]: https://user-images.githubusercontent.com/10624937/42135623-e770e354-7d12-11e8-998d-29fc74429ca2.gif "Trained Agent"
 [image2]: https://user-images.githubusercontent.com/10624937/42135622-e55fb586-7d12-11e8-8a54-3c31da15a90a.gif "Soccer"
 [image3]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p3_collab-compet/DDGP_ALGO.PNG "Algo"
+[image4]: https://github.com/ShubraChowdhury/DeepReinforcementLearning/blob/master/p3_collab-compet/PLOT.PNG "Plot"
 
 
 # REPORT For Project 3: Collaboration and Competition
@@ -32,7 +33,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 There are 3 main files ddpg_agent.py and model.py, and  Tennis.ipynb. 
 
 1. model.py: Architecture and logic for the neural networks implementing the actor and critic for the chosen DDPG algorithm.
-    Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 3 fully connected layer (of 400, 300 and 100 units). In both case a 1D batch normalization has been used.Input and output layers sizes are determined by the state and action space.
+    Actor model has 2 fully connected layer (of 400 and 300 units) and Critic has 2 fully connected layer (of 400, 300 units).Input and output layers sizes are determined by the state and action space.
 
 Actor Model/Network architecture | Value
 --- | ---
@@ -43,7 +44,7 @@ Critic Model/Network architecture | Value
 --- | ---
 fc1_units | 400  
 fc2_units | 300 
-fc2_units | 100
+
     
 2. ddpg_agent.py: This program implements Agent class and OUNoise, Agent includes step_and_buff() which saves experience in replay memory and use random sample from buffer to learn, act() which returns actions for given state as per current policy, learn() which Update policy and value parameters using given batch of experience tuples  which is used  to train the agent, and uses 'model.py' to generate the local and target networks for the actor and critic.
 
@@ -197,7 +198,7 @@ Environment solved in 1077 episodes!	Average Score: 0.5066, total training time:
 Maximum Average Score (over 100 episodes): 2.1498  at Episode: 1542
 
 ### Training Reward/Score Plot
-![Plot][image2]
+![Plot][image4]
 
 ###  Ideas for future work
 
