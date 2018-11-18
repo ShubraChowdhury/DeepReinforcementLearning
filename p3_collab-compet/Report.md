@@ -192,6 +192,7 @@ Episodes | Episode Score |Average Score
 
 
 Environment solved in 1077 episodes!	Average Score: 0.5066, total training time: 1912.06 seconds
+
 Maximum Average Score (over 100 episodes): 2.1498  at Episode: 1542
 
 ### Training Reward/Score Plot
